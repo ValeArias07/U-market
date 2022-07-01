@@ -15,7 +15,7 @@ import com.icesi.umarket.util.Util
 class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
 
     //STATE
-    var product: Product? = null
+    lateinit var product: Product
     lateinit var onProductObserver: ConsumerMainOverviewFragment.SellerObserver
 
     //UI controllers
@@ -27,12 +27,12 @@ class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         producImageRow.setOnClickListener {
             onProductObserver.sendProduct(
                 Product(
-                    product!!.id,
+                    product.id,
                     productNameRow.text.toString(),
-                    Integer.parseInt(productPriceRow.text.toString()),
-                    product!!.description,
-                    product!!.imageID,
-                    product!!.amount)
+                    product.price,
+                    product.description,
+                    product.imageID,
+                    product.amount)
             )
         }
     }

@@ -29,6 +29,7 @@ class ConfirmPurchaseDialogFragment : DialogFragment() {
         _binding.orderTextConsumer.text = orderText
         _binding.acceptOrderConsumerBtn.setOnClickListener {
             onConfirmPurchaseObserver.confirm()
+            onConfirmPurchaseObserver.resetFlag()
             dismiss()
         }
 
@@ -50,6 +51,7 @@ class ConfirmPurchaseDialogFragment : DialogFragment() {
     interface ConfirmPurchaseObserver{
         fun confirm()
         fun discard()
+        fun resetFlag()
     }
 }
 

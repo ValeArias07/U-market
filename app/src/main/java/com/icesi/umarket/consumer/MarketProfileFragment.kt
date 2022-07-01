@@ -75,10 +75,16 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDialogFragment.ConfirmP
 
     override fun confirm() {
         onProductObserver.sendMessage(shoppingCar.sendMessage())
+        resetFlag()
     }
 
     override fun discard() {
         onProductObserver.backToMarkets()
+        resetFlag()
+    }
+
+    override fun resetFlag() {
+        onProductObserver.carHasOrders(false)
     }
 
     fun setUser(user: User){

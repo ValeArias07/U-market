@@ -74,5 +74,6 @@ class ConsumerMainOverviewFragment : Fragment() {
         fun backToMarketBlank()
         fun backToTheMainMarket()
         fun sendMarketInfo(market: Market)
+        fun carHasOrders(state:Boolean)
     }
 }

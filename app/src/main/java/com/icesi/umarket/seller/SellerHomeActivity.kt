@@ -142,17 +142,27 @@ class SellerHomeActivity : AppCompatActivity(),
         changeAmountOfProduct(currentOrder.idOrder)
     }
 
-    private fun changeAmountOfProduct(idOrder: String){
-        var currentOrder = Firebase.firestore.collection("orders").document(idOrder).get().result.toObject(Order::class.java)!!
-        var currentProduct = Firebase.firestore.collection("markets").document(currentOrder.idMarket).collection("products").document(currentOrder.idProduct).get().result.toObject(Product::class.java)!!
-        var amountChanged = currentProduct.amount - currentOrder.amount
+    private fun changeAmountOfProduct(idOrder: String) {
+        Firebase.firestore.collection("orders").document(idOrder).get()
+            .addOnSuccessListener {
+                var currentOrder = it.toObject(Order::class.java)!!
 
-        Firebase.firestore.collection("markets")
-            .document(currentOrder.idMarket)
-            .collection("products")
-            .document(currentOrder.idProduct)
-            .update("amount", amountChanged)
+                Firebase.firestore.collection("markets").document(currentOrder.idMarket)
+                    .collection("products").document(currentOrder.idProduct).get()
+                    .addOnSuccessListener {
+
+                        var currentProduct = it.toObject(Product::class.java)!!
+                        var amountChanged = currentProduct.amount - currentOrder.amount
+
+                        Firebase.firestore.collection("markets")
+                            .document(currentOrder.idMarket)
+                            .collection("products")
+                            .document(currentOrder.idProduct)
+                            .update("amount", amountChanged)
+                    }
+            }
     }
+
 
     private fun changeFlag(valueFlag:String, idOrder: String){
         Firebase.firestore.collection("orders")

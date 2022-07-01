@@ -24,6 +24,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     ///Flags
     private var isInProductView: Boolean = false
+    private var shoppingCarNotNull: Boolean = false
 
     /// Fragments
     private  var consumerMainOverviewFragment = ConsumerMainOverviewFragment.newInstance()
@@ -103,6 +104,10 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         productFragment.setMarket(market)
     }
 
+    override fun carHasOrders(state: Boolean) {
+        shoppingCarNotNull = state
+    }
+
     override fun sendShoppingInfo(name: String, market: Market) {
         shoppingCar.consumerName = name
         shoppingCar.currentMarket = market
@@ -148,7 +153,14 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
     override fun onBackPressed() {
         when(isInProductView){
             true ->  backToTheMainMarket()
-            false -> askOrder(consumerMarketProfileFragment.getShoppingCar())
+            false -> {
+                if(shoppingCarNotNull){
+                    askOrder(consumerMarketProfileFragment.getShoppingCar())
+                }else{
+                    backToMarkets()
+                }
+            }
+
         }
     }
 }

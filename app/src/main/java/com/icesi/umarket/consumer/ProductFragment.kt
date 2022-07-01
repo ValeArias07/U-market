@@ -43,6 +43,7 @@ class ProductFragment : Fragment() {
 
         binding.pedirBtn.setOnClickListener {
             onOrderObserver.loadOrder(buildOrder())
+            onOrderObserver.carHasOrders(true)
         }
 
         return _binding.root
