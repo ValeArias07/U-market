@@ -57,6 +57,7 @@ class SellerHomeActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
+        showFragment(sellerMainOverviewFragment)
     }
 
     private fun loadUser(){

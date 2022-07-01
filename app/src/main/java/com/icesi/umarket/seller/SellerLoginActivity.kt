@@ -31,10 +31,6 @@ class SellerLoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.sellerLoginGoBackBtn.setOnClickListener {
-            finish()
-        }
-
         binding.loginBtn.setOnClickListener {
             logIn()
         }

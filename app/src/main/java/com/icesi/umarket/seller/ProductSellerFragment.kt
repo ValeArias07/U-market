@@ -30,10 +30,6 @@ class ProductSellerFragment : Fragment() {
         _binding = FragmentProductSellerBinding.inflate(inflater,container,false)
         buildProduct()
 
-        binding.productSellerBackBtn.setOnClickListener {
-            onProductSellerObserver.backToOverview()
-        }
-
         binding.eraseProductSellerButton.setOnClickListener{
             onProductSellerObserver.deleteProduct(product)
         }
@@ -48,7 +44,7 @@ class ProductSellerFragment : Fragment() {
     private fun buildProduct(){
         binding.productNameSeller.text = product.name
         binding.productInfoSeller.text = product.description
-        binding.priceProductSeller.text = "$" + product.price.toString()
+        binding.priceProductSeller.text = Util.refactMoneyAmount(product.price)
         binding.amoutOfProductSellerView.text = product.amount.toString()
         Util.loadImage(product.imageID,_binding.productSellerImg,"product-images" )
     }

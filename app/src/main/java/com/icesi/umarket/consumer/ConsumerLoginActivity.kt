@@ -31,10 +31,6 @@ class ConsumerLoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, SellerSignupActivity::class.java))
             }
         }
-        binding.sellerLoginGoBackBtn.setOnClickListener {
-            finish()
-        }
-
 
         binding.loginBtn.setOnClickListener {
             val email = binding.logInUserNameTextField.text.toString()

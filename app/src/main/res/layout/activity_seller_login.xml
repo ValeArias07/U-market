@@ -8,24 +8,6 @@
     tools:context=".seller.SellerLoginActivity">
 
     <Button
-        android:id="@+id/sellerLoginGoBackBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/shape_circle"
-        android:backgroundTint="#FAB057"
-        android:foregroundGravity="center"
-        android:gravity="center"
-        android:isScrollContainer="false"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/back_arrow_icon"
-        app:iconGravity="top"
-        app:iconPadding="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/loginBtn"
         android:layout_width="0dp"
         android:layout_height="45dp"
@@ -41,10 +23,10 @@
         android:id="@+id/imageView"
         android:layout_width="315dp"
         android:layout_height="203dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sellerLoginGoBackBtn"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/brand_logov2" />
 
     <EditText

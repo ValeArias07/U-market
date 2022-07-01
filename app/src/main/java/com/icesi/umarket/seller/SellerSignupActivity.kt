@@ -24,9 +24,7 @@ class SellerSignupActivity : AppCompatActivity() {
         binding.sellerLogInHyperLink.setOnClickListener {
             finish()
         }
-        binding.sellerSignupGoBackBtn.setOnClickListener {
-            finish()
-        }
+
         binding.nextSellerBtn.setOnClickListener(::registerSeller)
     }
 
