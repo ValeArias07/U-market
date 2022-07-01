@@ -30,7 +30,7 @@ class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         this.order = order
         productNameOrder.text = order.name
         amountProductOrder.text = "  " + order.amount.toString()
-        priceProductOrder.text = "  $" + order.totalPrice
+        priceProductOrder.text = Util.refactMoneyAmount(order.totalPrice)
         orderFlagColor(order.orderFlag)
         Util.loadImage(order.imageID,productImgOrderRow, "product-images")
     }

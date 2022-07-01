@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.Timestamp
 import com.icesi.umarket.databinding.FragmentProductBinding
@@ -68,10 +69,16 @@ class ProductFragment : Fragment() {
     private fun changeAmountText(state: Boolean){
         var amount = Integer.parseInt(_binding.amountText.text.toString())
         val productStock = product.amount
-        when(state){
-            true -> if(amount<productStock){ amount++ }
-            false -> if(amount>1){amount--}
+
+        if(productStock <= 0){
+            Toast.makeText(requireContext(), "Producto agotado por el momento", Toast.LENGTH_SHORT)
+        }else{
+            when(state){
+                true -> if(amount<productStock){ amount++ }
+                false -> if(amount>1){amount--}
+            }
         }
+
         binding.amountText.text = amount.toString()
     }
 

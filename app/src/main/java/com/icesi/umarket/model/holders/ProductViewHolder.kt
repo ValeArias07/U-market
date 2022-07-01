@@ -40,7 +40,7 @@ class ProductViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     fun bindProduct(product: Product){
         this.product = product
         productNameRow.text = product.name
-        productPriceRow.text = product.price.toString()
+        productPriceRow.text = Util.refactMoneyAmount(product.price)
         Util.loadImage(product.imageID.toString(),producImageRow, "product-images" )
     }
 }

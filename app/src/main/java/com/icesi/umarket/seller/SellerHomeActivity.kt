@@ -118,6 +118,7 @@ class SellerHomeActivity : AppCompatActivity(),
 
     override fun confirmOrder(idOrder: String, idUser: String){
         changeFlag(Constants.successFlag, idOrder)
+        changeAmountOfProduct(idOrder)
     }
 
     override fun cancelOrder(idOrder: String, idUser: String){
@@ -137,6 +138,20 @@ class SellerHomeActivity : AppCompatActivity(),
         Firebase.firestore.collection("orders")
             .document(currentOrder.idOrder)
             .set(currentOrder)
+
+        changeAmountOfProduct(currentOrder.idOrder)
+    }
+
+    private fun changeAmountOfProduct(idOrder: String){
+        var currentOrder = Firebase.firestore.collection("orders").document(idOrder).get().result.toObject(Order::class.java)!!
+        var currentProduct = Firebase.firestore.collection("markets").document(currentOrder.idMarket).collection("products").document(currentOrder.idProduct).get().result.toObject(Product::class.java)!!
+        var amountChanged = currentProduct.amount - currentOrder.amount
+
+        Firebase.firestore.collection("markets")
+            .document(currentOrder.idMarket)
+            .collection("products")
+            .document(currentOrder.idProduct)
+            .update("amount", amountChanged)
     }
 
     private fun changeFlag(valueFlag:String, idOrder: String){

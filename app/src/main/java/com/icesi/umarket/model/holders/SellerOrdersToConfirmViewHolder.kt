@@ -53,7 +53,7 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
         findUser()
         productName.setText(order.name)
         amount.setText(order.amount.toString())
-        price.setText("$" + order.totalPrice)
+        price.setText(Util.refactMoneyAmount(order.totalPrice))
         orderId = order.idOrder
         Util.loadImage(order.imageID,productImg, "product-images")
 

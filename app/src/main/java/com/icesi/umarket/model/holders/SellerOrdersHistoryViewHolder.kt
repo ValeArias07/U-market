@@ -30,7 +30,7 @@ class SellerOrdersHistoryViewHolder(itemView: View): RecyclerView.ViewHolder(ite
         findUser()
         productName.setText(order.name)
         amount.setText(order.amount.toString())
-        price.setText("$" + order.totalPrice)
+        price.setText(Util.refactMoneyAmount(order.totalPrice))
         orderId = order.idOrder
         status.setText(order.orderFlag)
         Util.loadImage(order.imageID,productImg,"product-images")

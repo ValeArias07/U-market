@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.icesi.umarket.util.Util
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -38,7 +39,7 @@ class ShoppingCar() {
             msg += "\n-"+order.amount+" de "+order.name
             total += order.totalPrice
         }
-        msg+="\n\nPara un total de $"+total
+        msg+="\n\nPara un total de $"+ Util.refactMoneyAmount(total)
         msg+="\nMuchas gracias! Espero tu respuesta."
         return msg
     }
