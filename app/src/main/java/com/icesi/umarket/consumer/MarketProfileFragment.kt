@@ -103,7 +103,7 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDialogFragment.ConfirmP
         return shoppingCar
     }
 
-    fun carHasOrders(){
+    fun carHasOrders(state: Boolean){
 
     }
 
