@@ -14,6 +14,7 @@ import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
 import com.icesi.umarket.model.adapters.ProductSellerAdapter
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductListener {
@@ -42,7 +43,7 @@ class SellerMainOverviewFragment : Fragment(), NewProductFragment.OnNewProductLi
                 val currentMarket = it.toObject(Market::class.java)
                 val marketName = currentMarket?.marketName
                 binding.marketNameTextView.text = marketName
-                Util.loadImage(currentMarket!!.imageID,binding.marketProfileImage,"market-image-profile" )
+                Util.loadImage(currentMarket!!.imageID,binding.marketProfileImage, Constants.marketProfileImg )
                 getProducts(user.marketID)
             }
     }

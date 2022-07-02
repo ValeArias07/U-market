@@ -8,10 +8,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
-import com.icesi.umarket.seller.SellerSignupActivity
-
 import com.icesi.umarket.databinding.ActivityConsumerLoginBinding
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 
 
 class ConsumerLoginActivity : AppCompatActivity() {
@@ -24,37 +23,32 @@ class ConsumerLoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signUpHyperLink.setOnClickListener {
-            var userType = intent.extras?.getString("userType","")
-            if(userType=="consumer"){
-                startActivity(Intent(this, ConsumerSignupActivity::class.java))
-            }else{
-                startActivity(Intent(this, SellerSignupActivity::class.java))
-            }
+            startActivity(Intent(this, ConsumerSignupActivity::class.java))
         }
 
         binding.loginBtn.setOnClickListener {
             val email = binding.logInUserNameTextField.text.toString()
             val password = binding.logInPasswdTextField.text.toString()
 
-            Firebase.auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    val currentUser = Firebase.auth.currentUser
+            if(email!="" && password !="") {
+                Firebase.auth.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        val currentUser = Firebase.auth.currentUser
 
-                    Firebase.firestore.collection("users").document(currentUser!!.uid).get()
-                        .addOnSuccessListener {
-                            val user = it.toObject(User::class.java)
-
-                            startActivity(Intent(this, ConsumerHomeActivity::class.java).apply{
-                                putExtra("currentUser", Gson().toJson(user))
-                            })
-                            finish()
-                        }.addOnFailureListener {
-                            Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
-                        }
-                }.addOnFailureListener {
-                    Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
-                }
-
+                        Firebase.firestore.collection("users").document(currentUser!!.uid).get()
+                            .addOnSuccessListener {
+                                val user = it.toObject(User::class.java)
+                                val intent = Intent(this, ConsumerHomeActivity::class.java).apply {
+                                    putExtra(Constants.userObj, Gson().toJson(user))}
+                                startActivity(intent)
+                                finish()
+                            }.addOnFailureListener {
+                                Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
+                            }
+                    }.addOnFailureListener {
+                        Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
+                    }
+            }
         }
     }
 }

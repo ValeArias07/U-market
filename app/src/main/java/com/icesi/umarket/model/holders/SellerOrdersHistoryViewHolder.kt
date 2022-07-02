@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class SellerOrdersHistoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -28,19 +29,19 @@ class SellerOrdersHistoryViewHolder(itemView: View): RecyclerView.ViewHolder(ite
     fun bindProduct(order: Order) {
         this.order = order
         findUser()
-        productName.setText(order.name)
-        amount.setText(order.amount.toString())
-        price.setText(Util.refactMoneyAmount(order.totalPrice))
+        productName.text = order.name
+        amount.text = order.amount.toString()
+        price.text = Util.refactMoneyAmount(order.totalPrice)
         orderId = order.idOrder
-        status.setText(order.orderFlag)
-        Util.loadImage(order.imageID,productImg,"product-images")
+        status.text = order.orderFlag
+        Util.loadImage(order.imageID,productImg,Constants.productImg)
     }
 
     private fun findUser() {
         Firebase.firestore.collection("users").document(order.idUser).get()
             .addOnSuccessListener {
                 var currentUser = it.toObject(User::class.java)!!
-                username.setText(currentUser.name)
+                username.text = currentUser.name
             }
     }
 }

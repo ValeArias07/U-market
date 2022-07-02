@@ -23,12 +23,7 @@ class SellerLoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signUpHyperLink.setOnClickListener {
-            var userType = intent.extras?.getString("userType","")
-            if(userType=="consumer"){
-                startActivity(Intent(this, ConsumerSignupActivity::class.java))
-            }else{
-                startActivity(Intent(this, SellerSignupActivity::class.java))
-            }
+            startActivity(Intent(this, SellerSignupActivity::class.java))
         }
 
         binding.loginBtn.setOnClickListener {
@@ -40,24 +35,25 @@ class SellerLoginActivity : AppCompatActivity() {
         val email = binding.logInUserNameTextField.text.toString()
         val password = binding.logInPasswdTextField.text.toString()
 
-        Firebase.auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                val currentUser = Firebase.auth.currentUser
-                Firebase.firestore.collection("users").document(currentUser!!.uid).get()
-                    .addOnSuccessListener {
-                        val user = it.toObject(Seller::class.java)
-                        var intent = Intent(this, SellerHomeActivity::class.java).apply {
-                            putExtra("currentUser", Gson().toJson(user))
+        if(email !="" && password!="") {
+            Firebase.auth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener {
+                    val currentUser = Firebase.auth.currentUser
+                    Firebase.firestore.collection("users").document(currentUser!!.uid).get()
+                        .addOnSuccessListener {
+                            val user = it.toObject(Seller::class.java)
+                            var intent = Intent(this, SellerHomeActivity::class.java).apply {
+                                putExtra("currentUser", Gson().toJson(user))
+                            }
+                            startActivity(intent)
+                            finish()
+
+                        }.addOnFailureListener {
+                            Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
                         }
-                        startActivity(intent)
-                        finish()
-
-                    }.addOnFailureListener {
-                        Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
-                    }
-            }.addOnFailureListener {
-                Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
-            }
+                }.addOnFailureListener {
+                    Toast.makeText(this.baseContext, it.message, Toast.LENGTH_LONG).show()
+                }
+        }
     }
-
 }

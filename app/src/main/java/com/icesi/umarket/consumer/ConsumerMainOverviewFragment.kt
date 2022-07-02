@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.databinding.FragmentConsumerMainOverviewBinding
 import com.icesi.umarket.model.*
 import com.icesi.umarket.model.adapters.MarketAdapter
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class ConsumerMainOverviewFragment : Fragment() {
@@ -42,7 +43,7 @@ class ConsumerMainOverviewFragment : Fragment() {
 
     private fun getUserData(){
         binding.consumerName.text = currentUser.name
-        Util.loadImage(currentUser.img,binding.consumerProfile,"profile" )
+        Util.loadImage(currentUser.img,binding.consumerProfile, Constants.userProfileImg )
     }
 
     private fun getMarkets() {

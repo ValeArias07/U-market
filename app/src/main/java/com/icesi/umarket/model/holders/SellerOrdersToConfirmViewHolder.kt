@@ -11,6 +11,7 @@ import com.icesi.umarket.R
 import com.icesi.umarket.seller.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -51,12 +52,11 @@ class SellerOrdersToConfirmViewHolder(itemView: View): RecyclerView.ViewHolder(i
     fun bindProduct(order: Order) {
         this.order = order
         findUser()
-        productName.setText(order.name)
-        amount.setText(order.amount.toString())
-        price.setText(Util.refactMoneyAmount(order.totalPrice))
+        productName.text = order.name
+        amount.text = order.amount.toString()
+        price.text = Util.refactMoneyAmount(order.totalPrice)
         orderId = order.idOrder
-        Util.loadImage(order.imageID,productImg, "product-images")
-
+        Util.loadImage(order.imageID,productImg, Constants.productImg)
     }
 
     private fun findUser() {

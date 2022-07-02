@@ -15,6 +15,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityConsumerSignupBinding
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 
 class ConsumerSignupActivity : AppCompatActivity() {
 
@@ -41,7 +42,7 @@ class ConsumerSignupActivity : AppCompatActivity() {
                         .document(user.id)
                         .set(user).addOnSuccessListener {
                             val intent = Intent(this, AdditionalConsumerInfoActivity::class.java)
-                                .putExtra("currentUser", Gson().toJson(user))
+                                .putExtra(Constants.userObj, Gson().toJson(user))
                             startActivity(intent)
                         }
 

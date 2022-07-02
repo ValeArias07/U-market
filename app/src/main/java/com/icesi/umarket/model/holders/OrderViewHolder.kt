@@ -1,16 +1,13 @@
 package com.icesi.umarket.model.holders
 
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Order
-import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
@@ -32,16 +29,14 @@ class OrderViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         amountProductOrder.text = "  " + order.amount.toString()
         priceProductOrder.text = Util.refactMoneyAmount(order.totalPrice)
         orderFlagColor(order.orderFlag)
-        Util.loadImage(order.imageID,productImgOrderRow, "product-images")
+        Util.loadImage(order.imageID,productImgOrderRow, Constants.productImg)
     }
 
     private fun orderFlagColor(orderFlag: String) {
-        if(orderFlag == "Exitosa"){
-            statusProductOrder.setTextColor(Color.rgb(139,195,74))
-        }else if(orderFlag == "Cancelada"){
-            statusProductOrder.setTextColor(Color.rgb(255,51,51))
-        }else if(orderFlag == "Editada"){
-            statusProductOrder.setTextColor(Color.rgb(103,58,183))
+        when (orderFlag) {
+            Constants.successFlag -> statusProductOrder.setTextColor(Color.rgb(139, 195, 74))
+            Constants.cancelFlag -> statusProductOrder.setTextColor(Color.rgb(255, 51, 51))
+            Constants.editFlag -> statusProductOrder.setTextColor(Color.rgb(103, 58, 183))
         }
         statusProductOrder.text = orderFlag
     }

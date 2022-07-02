@@ -9,6 +9,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivitySellerEditProfileBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Constants
 
 class SellerEditProfileActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class SellerEditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySellerEditProfileBinding.inflate(layoutInflater)
-        seller = Gson().fromJson(intent.extras!!.getString("currentSeller", ""), Seller::class.java)
+        seller = Gson().fromJson(intent.extras!!.getString(Constants.userObj, ""), Seller::class.java)
 
         Firebase.firestore.collection("markets").document(seller.marketID).get()
             .addOnSuccessListener {
@@ -46,7 +47,7 @@ class SellerEditProfileActivity : AppCompatActivity() {
 
         startActivity(
             Intent(this, SellerHomeActivity::class.java).apply {
-                putExtra("currentUser", Gson().toJson(seller))
+                putExtra(Constants.userObj, Gson().toJson(seller))
             })
     }
 

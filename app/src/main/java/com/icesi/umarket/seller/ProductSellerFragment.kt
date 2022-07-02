@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.icesi.umarket.databinding.FragmentProductSellerBinding
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class ProductSellerFragment : Fragment() {
@@ -46,7 +47,7 @@ class ProductSellerFragment : Fragment() {
         binding.productInfoSeller.text = product.description
         binding.priceProductSeller.text = Util.refactMoneyAmount(product.price)
         binding.amoutOfProductSellerView.text = product.amount.toString()
-        Util.loadImage(product.imageID,_binding.productSellerImg,"product-images" )
+        Util.loadImage(product.imageID,_binding.productSellerImg, Constants.productImg)
     }
 
     fun setCurrentProduct(product: Product){
