@@ -106,6 +106,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
 
     override fun carHasOrders(state: Boolean) {
         shoppingCarNotNull = state
+        consumerMarketProfileFragment.carHasOrders(state)
     }
 
     override fun sendShoppingInfo(name: String, market: Market) {
@@ -160,7 +161,6 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
                     backToMarkets()
                 }
             }
-
         }
     }
 }

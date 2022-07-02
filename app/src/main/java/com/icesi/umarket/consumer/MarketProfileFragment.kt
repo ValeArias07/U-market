@@ -103,6 +103,10 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDialogFragment.ConfirmP
         return shoppingCar
     }
 
+    fun carHasOrders(){
+
+    }
+
     interface BackButtonObserver{
         fun askOrder(shoppingCar: ShoppingCar)
     }
