@@ -1,16 +1,13 @@
 package com.icesi.umarket.model.holders
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.consumer.ConsumerMainOverviewFragment
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Market
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
@@ -28,17 +25,16 @@ class MarketViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
      * Envia en patron observer el nombre y la descripcion
      */
     init {
-
         marketImageRow.setOnClickListener {
             var marketE = market!!
             onSellerObserver.sendMarket(marketE)
         }
     }
 
-    fun bindMarket(marketBind: Market) {
-        market = marketBind
-        marketName.text = market!!.marketName
-        descriptMarket.text = market!!.marketShortDescription
-        Util.loadImage(market!!.imageID.toString(), marketImageRow, "market-image-profile")
+    fun bindMarket(market: Market) {
+        this.market = market
+        marketName.text = market.marketName
+        descriptMarket.text = market.marketShortDescription
+        Util.loadImage(market.imageID, marketImageRow, Constants.marketProfileImg)
     }
 }

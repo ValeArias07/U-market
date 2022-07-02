@@ -23,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.databinding.FragmentNewProductBinding
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 import java.io.File
 import java.util.*
@@ -69,7 +70,7 @@ class NewProductFragment : Fragment() {
                 .document(product.id)
                 .set(product)
                 .addOnSuccessListener {
-                    if (Util.sendImg(product.imageID, "product-images", productImageUri)){
+                    if (Util.sendImg(product.imageID, Constants.productImg, productImageUri)){
                         clearNewProductFields()
                         Toast.makeText(activity, "Producto publicado", Toast.LENGTH_LONG).show()
                     }

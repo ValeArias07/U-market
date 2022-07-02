@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.icesi.umarket.R
-import com.icesi.umarket.seller.SellerOrderOverviewFragment
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.holders.SellerOrdersToConfirmViewHolder
+import com.icesi.umarket.seller.SellerOrderOverviewFragment
 
 class SellerOrdersToConfirmAdapter: RecyclerView.Adapter<SellerOrdersToConfirmViewHolder>(),
     SellerOrdersToConfirmViewHolder.OnChangesInOrderListener {
@@ -39,15 +39,13 @@ class SellerOrdersToConfirmAdapter: RecyclerView.Adapter<SellerOrdersToConfirmVi
             notifyItemRangeRemoved(0,size)
         }
 
-        fun addOrder(order: Order){
-            if(order.orderFlag=="Pendiente"){
-                orders.add(order)
-                notifyItemInserted(orders.size-1)
-            }
+        fun addOrder(order: Order) {
+            orders.add(order)
+            notifyItemInserted(orders.size - 1)
+
         }
 
     override fun deleteOrder(order: Order) {
-        Log.e("Order eliminada ", orders.indexOf(order).toString())
         var index = orders.indexOf(order)
         orders.removeAt(index)
         notifyItemRemoved(index)

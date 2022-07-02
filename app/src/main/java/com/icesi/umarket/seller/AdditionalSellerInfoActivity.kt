@@ -3,7 +3,6 @@ package com.icesi.umarket.seller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,6 +12,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityAdditionalSellerInfoBinding
 import com.icesi.umarket.model.Market
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 import java.util.*
 
@@ -33,7 +33,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onGalleryResult)
-        currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), Seller::class.java)
+        currentUser = Gson().fromJson(intent.extras?.getString(Constants.userObj,""), Seller::class.java)
 
         binding.sellerSignupBtn.setOnClickListener {
             sendSeller()
@@ -81,7 +81,7 @@ class AdditionalSellerInfoActivity : AppCompatActivity() {
             binding.marketImageProfile.setImageURI(uri)
             idImg = UUID.randomUUID().toString()
 
-           if(Util.sendImg(idImg,"market-image-profile", uri)){
+           if(Util.sendImg(idImg, Constants.marketProfileImg, uri)){
                Toast.makeText(this, "Imagen cargada", Toast.LENGTH_LONG).show()
            }
 

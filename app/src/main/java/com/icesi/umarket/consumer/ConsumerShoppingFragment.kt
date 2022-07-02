@@ -12,6 +12,7 @@ import com.icesi.umarket.databinding.FragmentConsumerShoppingBinding
 import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.User
 import com.icesi.umarket.model.adapters.OrderAdapter
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class ConsumerShoppingFragment : Fragment() {
@@ -35,7 +36,7 @@ class ConsumerShoppingFragment : Fragment() {
         Util.initRecycler(binding.ordersRecyclerView, requireActivity(),LinearLayoutManager.VERTICAL ).adapter = adapter
 
         binding.consumerNameShopping.text = currentUser.name
-        Util.loadImage(currentUser.img,_binding.consumerProfileShopping, "profile")
+        Util.loadImage(currentUser.img,_binding.consumerProfileShopping, Constants.userProfileImg)
 
         loadOrders()
         return _binding.root

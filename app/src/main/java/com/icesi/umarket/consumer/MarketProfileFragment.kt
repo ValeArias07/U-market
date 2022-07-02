@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.icesi.umarket.databinding.FragmentMarketProfileBinding
 import com.icesi.umarket.model.*
 import com.icesi.umarket.model.adapters.ProductAdapter
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class MarketProfileFragment : Fragment(), ConfirmPurchaseDialogFragment.ConfirmPurchaseObserver {
@@ -41,7 +42,7 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDialogFragment.ConfirmP
         _binding.marketName.text = currentMarket.marketName
 
         Util.initRecycler(binding.productsMarketInConsumer, requireActivity(),LinearLayoutManager.HORIZONTAL).adapter = adapter
-        Util.loadImage(currentMarket.imageID, binding.marketImageProfile,"market-image-profile" )
+        Util.loadImage(currentMarket.imageID, binding.marketImageProfile, Constants.marketProfileImg)
 
         loadProducts()
 
@@ -65,7 +66,8 @@ class MarketProfileFragment : Fragment(), ConfirmPurchaseDialogFragment.ConfirmP
     }
 
     private fun loadProducts(){
-        Firebase.firestore.collection("markets").document(currentMarket.id).collection("products").get()
+        Firebase.firestore.collection("markets").document(currentMarket.id)
+            .collection("products").get()
             .addOnSuccessListener { task ->
             for(product in task.documents){
                 adapter.addProduct(product.toObject(Product::class.java)!!)

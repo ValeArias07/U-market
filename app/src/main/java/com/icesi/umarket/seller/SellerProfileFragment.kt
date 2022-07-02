@@ -15,6 +15,7 @@ import com.icesi.umarket.model.Seller
 import com.icesi.umarket.util.Util
 import com.icesi.umarket.databinding.FragmentSellerProfileBinding
 import com.icesi.umarket.model.Market
+import com.icesi.umarket.util.Constants
 
 class SellerProfileFragment : Fragment() {
 
@@ -42,7 +43,7 @@ class SellerProfileFragment : Fragment() {
         binding.settingsSellerBtn.setOnClickListener {
             startActivity(
                 Intent(requireActivity(), SellerEditProfileActivity::class.java).apply {
-                    putExtra("currentSeller", Gson().toJson(seller))
+                    putExtra(Constants.userObj, Gson().toJson(seller))
                 }
             )
         }
@@ -51,7 +52,7 @@ class SellerProfileFragment : Fragment() {
     }
 
     private fun getMarketInfo(){
-        Util.loadImage(market.imageID, binding.profilePhotoSeller, "market-image-profile")
+        Util.loadImage(market.imageID, binding.profilePhotoSeller, Constants.marketProfileImg)
         binding.nameMarket.text = market.marketName
         binding.emailSeller.text = seller.email
         binding.phoneSeller.text = market.phoneNumber

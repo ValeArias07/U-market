@@ -10,6 +10,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivitySellerSignupBinding
 import com.icesi.umarket.model.Seller
+import com.icesi.umarket.util.Constants
 
 class SellerSignupActivity : AppCompatActivity() {
 
@@ -42,7 +43,7 @@ class SellerSignupActivity : AppCompatActivity() {
                     .addOnSuccessListener {
                         val id = Firebase.auth.currentUser?.uid
                         var user = Seller(id.toString(), sellerName, email, password, phone, "seller")
-                        i.putExtra("currentUser", Gson().toJson(user))
+                        i.putExtra(Constants.userObj, Gson().toJson(user))
                         startActivity(i)
                     }.addOnFailureListener {
                         Toast.makeText(this.baseContext,it.message, Toast.LENGTH_LONG).show()

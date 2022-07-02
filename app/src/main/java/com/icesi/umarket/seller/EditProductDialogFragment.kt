@@ -81,6 +81,5 @@ class EditProductDialogFragment : DialogFragment() {
     companion object {
         @JvmStatic
         fun newInstance() = EditProductDialogFragment()
-        const val TAG = "EditProductDialogFragment"
     }
 }

@@ -65,6 +65,5 @@ class EditOrderSellerDialogFragment : DialogFragment(){
     companion object {
         @JvmStatic
         fun newInstance() = EditOrderSellerDialogFragment()
-        const val TAG = "EditOrderSellerDialogFragment"
     }
 }

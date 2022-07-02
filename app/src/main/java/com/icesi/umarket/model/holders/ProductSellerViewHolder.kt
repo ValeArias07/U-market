@@ -4,12 +4,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.icesi.umarket.R
 import com.icesi.umarket.model.Product
 import com.icesi.umarket.seller.SellerMainOverviewFragment
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
@@ -33,6 +31,6 @@ class ProductSellerViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) 
         this.product = product
         productNameRow.text = product.name
         productPriceRow.text = Util.refactMoneyAmount(product.price)
-        Util.loadImage(product.imageID.toString(),producImageRow,"product-images" )
+        Util.loadImage(product.imageID,producImageRow, Constants.productImg)
     }
 }

@@ -17,6 +17,7 @@ import com.icesi.umarket.model.Order
 import com.icesi.umarket.model.Seller
 import com.icesi.umarket.model.adapters.SellerOrdersHistoryAdapter
 import com.icesi.umarket.model.adapters.SellerOrdersToConfirmAdapter
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class SellerOrderOverviewFragment : Fragment() {
@@ -92,10 +93,10 @@ class SellerOrderOverviewFragment : Fragment() {
                 market = currentMarket!!
                 val marketName = currentMarket.marketName
                 binding.marketNameTextView.text = marketName
-                Util.loadImage(currentMarket.imageID, binding.marketProfileImage, "market-image-profile")
+                Util.loadImage(currentMarket.imageID, binding.marketProfileImage, Constants.marketProfileImg)
             }
-        getOrders(user.marketID, "historyOrders", false)
-        getOrders(user.marketID, "pendentOrders", true)
+        getOrders(user.marketID, Constants.historyOrdersName, false)
+        getOrders(user.marketID, Constants.pendentOrdersName, true)
     }
 
     companion object {

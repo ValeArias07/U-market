@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.icesi.umarket.databinding.ActivityConsumerEditProfileBinding
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.Util
 
 class ConsumerEditProfile : AppCompatActivity() {
@@ -20,7 +21,7 @@ class ConsumerEditProfile : AppCompatActivity() {
         binding = ActivityConsumerEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), User::class.java)
+        currentUser = Gson().fromJson(intent.extras?.getString(Constants.userObj,""), User::class.java)
         loadInformation(currentUser)
 
         binding.editDoneBtn.setOnClickListener{
@@ -30,7 +31,7 @@ class ConsumerEditProfile : AppCompatActivity() {
             Toast.makeText(this, "Actualizacion exitosa", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this, ConsumerHomeActivity::class.java).apply{
-                putExtra("currentUser", Gson().toJson(currentUser))
+                putExtra(Constants.userObj, Gson().toJson(currentUser))
             }
 
             startActivity(intent)

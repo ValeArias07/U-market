@@ -64,7 +64,7 @@ class ProductFragment : Fragment() {
         binding.productInfo.text = product.description
         binding.priceProduct.text = "$" + product.price.toString()
         binding.amoutStockProduct.text  = product.amount.toString()
-        Util.loadImage(product.imageID, binding.productImg,"product-images")
+        Util.loadImage(product.imageID, binding.productImg,Constants.productImg)
     }
 
     private fun changeAmountText(state: Boolean){

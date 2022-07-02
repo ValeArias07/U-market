@@ -10,6 +10,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityConsumerHomeBinding
 import com.icesi.umarket.model.*
+import com.icesi.umarket.util.Constants
 
 class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.SellerObserver,
     MarketProfileFragment.BackButtonObserver{
@@ -42,7 +43,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         menuConsumer = binding.menuConsumer
         setContentView(binding.root)
 
-        currentUser = Gson().fromJson(intent.extras?.getString("currentUser",""), User::class.java)
+        currentUser = Gson().fromJson(intent.extras?.getString(Constants.userObj,""), User::class.java)
 
         loadUserInFragments()
         loadListeners()
@@ -144,7 +145,7 @@ class ConsumerHomeActivity : AppCompatActivity(), ConsumerMainOverviewFragment.S
         if(shoppingCar.getAmountOfOrders() > 0) {
             val orderText = shoppingCar.generateConfirmText()
             dialogFragment.orderText = orderText
-            dialogFragment.show(supportFragmentManager, "PurchaseConfirmationDialog")
+            dialogFragment.show(supportFragmentManager, Constants.dialogPurchase)
         }else{
             backToMarkets()
         }

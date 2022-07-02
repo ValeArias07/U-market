@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import com.icesi.umarket.R
 import com.icesi.umarket.databinding.ActivityAdditionalConsumerInfoBinding
 import com.icesi.umarket.model.User
+import com.icesi.umarket.util.Constants
 import com.icesi.umarket.util.UtilDomi
 import java.util.*
 
@@ -75,7 +76,7 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             isCorrect = false
         }else{
             ///Create method to save img in the Storage
-            userObj =  Gson().fromJson(intent.extras?.getString("currentUser","").toString(),User::class.java)
+            userObj =  Gson().fromJson(intent.extras?.getString(Constants.userObj,"").toString(),User::class.java)
             userObj.phone = phone
         }
         return isCorrect
@@ -99,7 +100,7 @@ class AdditionalConsumerInfoActivity : AppCompatActivity() {
             changeImage = true;
             idImg = UUID.randomUUID().toString()
 
-            Firebase.storage.reference.child("profile").child(idImg.toString())
+            Firebase.storage.reference.child(Constants.userProfileImg).child(idImg.toString())
                 .putFile(uri!!)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Imagen cargada", Toast.LENGTH_LONG).show()
